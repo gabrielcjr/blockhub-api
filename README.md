@@ -71,3 +71,19 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+Creating controllers and services 
+$ nest g controller associates
+$ nest g controller projects
+$ nest g service associates
+$ nest g service projects
+
+Another way
+
+$ nest g resource
+
+Select transport layer do you use?
+REST API
+Would you like to generate CRUD entry points? 
+Y
