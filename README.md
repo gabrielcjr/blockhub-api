@@ -87,3 +87,15 @@ Select transport layer do you use?
 REST API
 Would you like to generate CRUD entry points? 
 Y
+
+Instal DB Interface
+
+$ npm install typeorm --save
+
+Create .env
+
+Migration Postgres
+
+$ npm run typeorm migration:create -- -n create-associates-table
+
+$ npm run typeorm migration:create -- -n create-projects-table

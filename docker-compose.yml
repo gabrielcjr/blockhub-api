@@ -3,12 +3,24 @@ version: '3'
 services:
   app:
     build: .
-    entrypoint: ./.docker/entrypoint.sh
+    entrypoint: dockerize -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
     container_name: app
     ports:
       - 3000:3000
     volumes:
       - .:/home/node/app
+    depends_on:
+      - db
 
-
-# dockerize -wait tcp://db:5432 -timeout 40s 
+  db:
+    build: .docker/postgres
+    container_name: db
+    restart: always
+    tty: true
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=blockhub
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
