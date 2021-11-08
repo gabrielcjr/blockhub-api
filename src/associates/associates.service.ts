@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Project } from 'src/projects/entities/project.entity';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
@@ -31,10 +30,12 @@ export class AssociatesService {
       throw new EntityNotFoundError(Associate, id + 'Associate not found');
     }
       return this.associateRepo.findOne(id);
-    return `This action updates a #${id} associate`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} associate`;
+  async remove(id: number) {
+    const deleteResult = await this.associateRepo.delete(id);
+    if (!deleteResult.affected) {
+      throw new EntityNotFoundError(Associate, id + 'Associate not found');
+    }
   }
 }

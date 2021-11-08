@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
 import { AssociatesService } from './associates.service';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
@@ -27,6 +27,7 @@ export class AssociatesController {
     return this.associatesService.update(+id, updateAssociateDto);
   }
 
+  @HttpCode(204)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.associatesService.remove(+id);

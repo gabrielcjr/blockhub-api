@@ -19,3 +19,30 @@ Content-type: application/json
     "Nome": "associate test alterado",
     "Cargo": "back-end dev alterado"
 }
+###
+DELETE http://localhost:3000/associates/1
+###
+POST http://localhost:3000/projects
+Content-type: application/json
+
+{
+    "Nome": "associate test",
+    "Descrição": "back-end dev",
+    "Início": "01/01/2022",
+    "Fim": "02/01/2022",
+    "Ativo": true
+}
+###
+GET http://localhost:3000/projects
+###
+GET http://localhost:3000/projects/1
+###
+PATCH  http://localhost:3000/projects/1
+Content-type: application/json
+
+{
+    "Nome": "project test alterado",
+    "Descrição": "project alterado"
+}
+###
+DELETE http://localhost:3000/projects/1
