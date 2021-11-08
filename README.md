@@ -99,3 +99,15 @@ Migration Postgres
 $ npm run typeorm migration:create -- -n create-associates-table
 
 $ npm run typeorm migration:create -- -n create-projects-table
+
+Migração
+
+$ npm install pg --save
+
+$ npm run typeorm migration:run
+
+Depois de modelado o associate.entity.ts e project.entity.ts, instalar
+
+$ npm install @nestjs/typeorm --save
+
+$ npm install @nestjs/config --save

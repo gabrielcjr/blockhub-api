@@ -15,17 +15,17 @@ export class CreateAssociatesTable1636136093732 implements MigrationInterface {
                     {
                         name: 'Nome',
                         type: 'varchar',
-                        notNull: true,
+                        
                     },
                     {
                         name: 'Cargo',  
                         type: 'varchar',
-                        notNull: true,
+                        
                     },
                     {
                         name: 'Admissão',  
                         type: 'varchar',
-                        notNull: true,
+                        
                     },
                     {
                         name: 'Ativo',  
