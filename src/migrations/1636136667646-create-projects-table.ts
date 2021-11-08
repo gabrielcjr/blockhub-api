@@ -13,9 +13,10 @@ export class CreateProjectsTable1636136667646 implements MigrationInterface {
                         isGenerated: true,
                         generationStrategy: 'increment',
                     },
-                    {
+                    {   
                         name: 'Nome',
                         type: 'varchar',
+                        isUnique: true,
                     },
                     {
                         name: 'Descrição',  

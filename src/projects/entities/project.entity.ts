@@ -5,7 +5,7 @@ export class Project {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique: true})
     Nome: string;
 
     @Column()

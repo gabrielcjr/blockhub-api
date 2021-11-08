@@ -26,7 +26,7 @@ POST http://localhost:3000/projects
 Content-type: application/json
 
 {
-    "Nome": "associate test",
+    "Nome": "associate test2",
     "Descrição": "back-end dev",
     "Início": "01/01/2022",
     "Fim": "02/01/2022",
