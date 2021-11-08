@@ -12,11 +12,11 @@ GET http://localhost:3000/associates
 ###
 GET http://localhost:3000/associates/1
 ###
-PATCH  http://localhost:3000/associates/1
+PATCH  http://localhost:3000/associates/6
 Content-type: application/json
 
 {
-    "Nome": "associate test alterado",
+    # "Nome": "associate test alterado",
     "Cargo": "back-end dev alterado"
 }
 ###

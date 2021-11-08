@@ -111,3 +111,7 @@ Depois de modelado o associate.entity.ts e project.entity.ts, instalar
 $ npm install @nestjs/typeorm --save
 
 $ npm install @nestjs/config --save
+
+Validação
+
+$ npm install class-validator class-transformer
