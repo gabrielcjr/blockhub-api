@@ -143,7 +143,7 @@ npm install @nestjs/passport --save
 
 nest g service auth/jwt-strategy
 
-
+nest g guard auth/role
 
 npm uninstall --save @nestjs/passport passport passport-local
 npm uninstall --save-dev @types/passport-local
