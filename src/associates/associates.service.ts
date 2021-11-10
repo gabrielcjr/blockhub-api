@@ -36,6 +36,6 @@ export class AssociatesService {
     const deleteResult = await this.associateRepo.delete(id);
     if (!deleteResult.affected) {
       throw new EntityNotFoundError(Associate, id + 'Associate not found');
-    }
+    };
   }
 }

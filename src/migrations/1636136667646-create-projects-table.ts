@@ -1,7 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
 export class CreateProjectsTable1636136667646 implements MigrationInterface {
-
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
@@ -24,11 +23,11 @@ export class CreateProjectsTable1636136667646 implements MigrationInterface {
                     },
                     {
                         name: 'Início',  
-                        type: 'varchar',
+                        type: 'date',
                     },
                     {
                         name: 'Fim',  
-                        type: 'varchar',
+                        type: 'date',
                     },
                     {
                         name: 'Ativo',  

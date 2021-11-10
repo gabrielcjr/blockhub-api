@@ -115,3 +115,35 @@ $ npm install @nestjs/config --save
 Validação
 
 $ npm install class-validator class-transformer
+
+
+
+JWT Auth
+
+nest g module auth
+
+nest g controller auth/auth
+
+nest g service auth/auth
+
+npm install bcrypt --save
+
+node generate-pass.js 123456
+
+npm install base64-url --save
+
+Validate token
+
+https://jwt.io/
+
+npm install passport passport-jwt --save
+npm install @types/passport @types/passport-jwt --save-dev
+npm install @nestjs/jwt --save
+npm install @nestjs/passport --save
+
+nest g service auth/jwt-strategy
+
+
+
+npm uninstall --save @nestjs/passport passport passport-local
+npm uninstall --save-dev @types/passport-local

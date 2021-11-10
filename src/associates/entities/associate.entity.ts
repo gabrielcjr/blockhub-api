@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
 
 @Entity({ name: 'associates'}) 
 export class Associate {
@@ -16,4 +16,6 @@ export class Associate {
 
     @Column()
     Ativo: boolean;
+
+
 }

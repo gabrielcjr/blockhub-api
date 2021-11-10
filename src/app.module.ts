@@ -5,12 +5,13 @@ import { ProjectsModule } from './projects/projects.module';
 import { AssociatesModule } from './associates/associates.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-
+import { ExecutionsModule } from './executions/executions.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    ProjectsModule, 
+    ProjectsModule,
     AssociatesModule,
     TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION as any,
@@ -20,7 +21,9 @@ import { ConfigModule } from '@nestjs/config';
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
       entities: [process.env.TYPEORM_ENTITIES],
-    })  
+    }),
+    ExecutionsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

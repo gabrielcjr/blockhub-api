@@ -9,6 +9,7 @@ Content-type: application/json
 }
 ###
 GET http://localhost:3000/associates
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoidXNlcjFAdXNlci5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzY1NjEyNTQsImV4cCI6MTYzNjU2MTMxNH0.YHAThK7Xe7Pd4BgZ0GACYKRdpaQ1BTBvK4jjuD26IyY
 ###
 GET http://localhost:3000/associates/1
 ###
@@ -20,7 +21,7 @@ Content-type: application/json
     "Cargo": "back-end dev alterado"
 }
 ###
-DELETE http://localhost:3000/associates/1
+DELETE http://localhost:3000/associates/2
 ###
 POST http://localhost:3000/projects
 Content-type: application/json
@@ -45,4 +46,41 @@ Content-type: application/json
     "Descrição": "project alterado"
 }
 ###
-DELETE http://localhost:3000/projects/1
+DELETE http://localhost:3000/projects/3
+###
+POST http://localhost:3000/executions
+Content-type: application/json
+
+{
+    "ProjetoId": "1",
+    "ColaboradorId": "1",
+    "Inicio": "2021/01/01",
+    "Fim": "2021/12/31",
+    "Ativo": true
+}
+###
+GET http://localhost:3000/executions
+###
+GET http://localhost:3000/executions/2
+###
+PATCH  http://localhost:3000/executions/2
+Content-type: application/json
+
+{
+    "ProjetoId": "1",
+    "ColaboradorId": "1",
+    "Inicio": "2021/01/02"
+}
+###
+DELETE http://localhost:3000/executions/1
+###
+POST http://localhost:3000/login
+Content-type: application/json
+
+{
+    "username": "user1@user.com",
+    "password": "123456"
+}
+###
+GET http://localhost:3000/test-auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoidXNlcjFAdXNlci5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MzY1NjEwODEsImV4cCI6MTYzNjU2MTE0MX0.eIngNsuxCbuHlmq6neqkAvttEIwwHku_1S___igw86g

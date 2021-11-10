@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, ValidationPipe, UseGuards } from '@nestjs/common';
+import { JwtGuard } from 'src/auth/auth/jwt.guard';
 import { AssociatesService } from './associates.service';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
 
+// @UseGuards(JwtGuard)
 @Controller('associates')
 export class AssociatesController {
   constructor(private readonly associatesService: AssociatesService) {}
