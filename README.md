@@ -49,57 +49,35 @@ https://docs.docker.com/engine/install/ubuntu/
 
 https://docs.docker.com/compose/install/
 
-## Expected result when the application is succesfully running 
+## The expected result when the application is successfully running 
 
+![Image](https://github.com/gabrielcjr/blockhub-api/blob/master/Running_app.png)
 
-
-## Installation
-
-```bash
-$ npm install
-```
-
-## Installation
+## Open a new terminal and execute the following command to enter in the application container
 
 ```bash
-$ npm install
+$ docker-compose exec app bash
 ```
 
-## Running the app
+## Now, run the migration
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ npm run typeorm migration:run
 ```
 
-## Test
+Once migration is done, use the api.http file, associated with REST Client Extension for VS Code to test the routes.
+
+Also, you can open Swagger to see all available endpoints at
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+http://localhost:3000/api/
 ```
 
-## Support
+For evaluation purposes, only /test-auth is protected with Token requirement to send requests. 
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+All other endpoins are open, but with @UseGuards(JwtGuard) notation commented. 
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+To activate token requirement, just remove the comment from this notation from *.controller.ts of projects, associates, and executions.
 
 ## License
 
