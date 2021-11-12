@@ -1,13 +1,13 @@
+import { Associate } from "src/associates/entities/associate.entity";
 import { Execution } from "src/executions/entities/execution.entity";
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToMany, JoinTable, OneToMany } from "typeorm";
 
 @Entity({ name: 'projects'}) 
 export class Project {
     @PrimaryGeneratedColumn()
-    @OneToMany(type => Execution, Execution => Execution.ProjetoId)
     id: number;
 
-    @Column({unique: true})
+    @Column()
     Nome: string;
 
     @Column()
@@ -22,5 +22,6 @@ export class Project {
     @Column()
     Ativo: boolean;
 
-
+    @OneToMany(() => Execution, execution => execution.project)
+    executions: Execution[];
 }

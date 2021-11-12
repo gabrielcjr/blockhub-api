@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Execution } from "src/executions/entities/execution.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm";
 
 @Entity({ name: 'associates'}) 
 export class Associate {
@@ -17,5 +18,6 @@ export class Associate {
     @Column()
     Ativo: boolean;
 
-
+    @OneToMany(() => Execution, execution => execution.project)
+    executions: Execution[];
 }

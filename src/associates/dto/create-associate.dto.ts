@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateAssociateDto {
     @IsNotEmpty()
@@ -10,5 +10,6 @@ export class CreateAssociateDto {
     @IsNotEmpty()
     @IsString()
     Admissão: string;
+    @IsBoolean()
     Ativo: boolean;
 }

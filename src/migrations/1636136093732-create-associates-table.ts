@@ -10,6 +10,7 @@ export class CreateAssociatesTable1636136093732 implements MigrationInterface {
                         name: 'id',
                         type: 'int',
                         isGenerated: true,
+                        isUnique: true,
                         generationStrategy: 'increment',
                     },
                     {

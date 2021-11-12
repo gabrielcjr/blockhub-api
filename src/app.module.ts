@@ -7,6 +7,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ExecutionsModule } from './executions/executions.module';
 import { AuthModule } from './auth/auth.module';
+import { Associate } from './associates/entities/associate.entity';
+import { Project } from './projects/entities/project.entity';
+import { Execution } from './executions/entities/execution.entity';
 
 @Module({
   imports: [
@@ -21,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
       entities: [process.env.TYPEORM_ENTITIES],
+      autoLoadEntities: true,
     }),
     ExecutionsModule,
     AuthModule,

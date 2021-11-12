@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { ExecutionsService } from './executions.service';
 import { CreateExecutionDto } from './dto/create-execution.dto';
 import { UpdateExecutionDto } from './dto/update-execution.dto';
@@ -11,7 +11,9 @@ export class ExecutionsController {
 
   @Post()
   create(@Body() createExecutionDto: CreateExecutionDto) {
-    return this.executionsService.create(createExecutionDto);
+    if (createExecutionDto.associateId) {
+      return this.executionsService.create(createExecutionDto);
+    }
   }
 
   @Get()

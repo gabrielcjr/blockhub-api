@@ -14,11 +14,11 @@ export class createExecutionsTable1636403539532 implements MigrationInterface {
                         generationStrategy: 'increment',
                     },
                     {   
-                        name: 'ProjetoId',
+                        name: 'projectId',
                         type: 'int',
                     },
                     {
-                        name: 'ColaboradorId',  
+                        name: 'associateId',  
                         type: 'int',
                     },
                     {
@@ -28,10 +28,6 @@ export class createExecutionsTable1636403539532 implements MigrationInterface {
                     {
                         name: 'Fim',  
                         type: 'date',
-                    },
-                    {
-                        name: 'Ativo',  
-                        type: 'boolean',
                     }
                 ]
             })

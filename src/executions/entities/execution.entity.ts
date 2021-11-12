@@ -1,6 +1,6 @@
 import { Associate } from "src/associates/entities/associate.entity";
 import { Project } from "src/projects/entities/project.entity";
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "executions" })
 export class Execution {
@@ -8,14 +8,10 @@ export class Execution {
     id: number;
 
     @Column()
-    ProjetoId: number;
-
-    @OneToOne(() => Project)
-    Project: Project
+    projectId: number;
 
     @Column()
-    @ManyToOne(() => Associate)
-    ColaboradorId: number;
+    associateId: number;
 
     @Column()
     Inicio: Date;
@@ -23,8 +19,12 @@ export class Execution {
     @Column()
     Fim: Date;
 
-    @Column()
-    Ativo: boolean;
+    @ManyToOne(() => Associate, (associate) => associate.executions)
+    @JoinTable({ name: "executions_associates_projects" })
+    associate: Associate[];
 
-    
+    @ManyToOne(() => Project, (project) => project.executions)
+    @JoinTable({ name: "executions_associates_projects" })
+    project: Project[];
 }
+

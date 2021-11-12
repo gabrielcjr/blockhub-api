@@ -10,6 +10,7 @@ export class CreateProjectsTable1636136667646 implements MigrationInterface {
                         name: 'id',
                         type: 'int',
                         isGenerated: true,
+                        isUnique: true,
                         generationStrategy: 'increment',
                     },
                     {   
