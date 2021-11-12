@@ -35,6 +35,12 @@ $ git clone https://github.com/gabrielcjr/blockhub-api.git
 $ cd blockhub-api
 ```
 
+## Give permission to the initialization script
+
+```bash
+chmod +x .docker/entrypoint.sh 
+```
+
 ## Run docker-compose
 
 ```bash
