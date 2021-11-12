@@ -1,6 +1,6 @@
 import { Associate } from "src/associates/entities/associate.entity";
 import { Project } from "src/projects/entities/project.entity";
-import { BeforeInsert, Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "executions" })
 export class Execution {

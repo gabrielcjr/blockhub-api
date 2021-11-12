@@ -1,4 +1,3 @@
-import { Associate } from "src/associates/entities/associate.entity";
 import { Execution } from "src/executions/entities/execution.entity";
 import { Entity, PrimaryGeneratedColumn, Column, Unique, ManyToMany, JoinTable, OneToMany } from "typeorm";
 

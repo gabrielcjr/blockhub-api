@@ -4,7 +4,6 @@ import { EntityNotFoundError, Repository } from 'typeorm';
 import { CreateExecutionDto } from './dto/create-execution.dto';
 import { UpdateExecutionDto } from './dto/update-execution.dto';
 import { Execution } from './entities/execution.entity';
-import { Client } from 'pg';
 
 @Injectable()
 export class ExecutionsService {

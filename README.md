@@ -79,6 +79,14 @@ All other endpoins are open, but with @UseGuards(JwtGuard) notation commented.
 
 To activate token requirement, just remove the comment from this notation from *.controller.ts of projects, associates, and executions.
 
+## For Further implementations
+
+This project is using PostgreSQL instead of MongoDB as suggested. 
+
+I couldn't implement the logic behind the limitation of one associate assigned for one project at a time, but I want to learn more to add value to future projects.
+
+## Enjoy!
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
