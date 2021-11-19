@@ -27,7 +27,7 @@ POST http://localhost:3000/projects
 Content-type: application/json
 
 {
-    "Nome": "associate test",
+    "Nome": "associate test1",
     "Descrição": "back-end dev",
     "Início": "12/01/2022",
     "Fim": "01/01/2022",
@@ -51,10 +51,10 @@ POST http://localhost:3000/executions
 Content-type: application/json
 
 {
-    "projectId": 2,
-    "associateId": 2,
-    "Inicio": "2021/01/01",
-    "Fim": "2021/12/31",
+    "projectId": 1,
+    "associateId": 1,
+    "Inicio": "01/04/2022",
+    "Fim": "01/05/2022",
     "Ativo": true
 }
 ###
@@ -71,7 +71,7 @@ Content-type: application/json
     "Inicio": "2021/01/02"
 }
 ###
-DELETE http://localhost:3000/executions/1
+DELETE http://localhost:3000/executions/5
 ###
 POST http://localhost:3000/login
 Content-type: application/json

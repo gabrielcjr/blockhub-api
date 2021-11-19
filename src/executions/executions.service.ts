@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Associate } from 'src/associates/entities/associate.entity';
+import { Project } from 'src/projects/entities/project.entity';
 import { EntityNotFoundError, Repository } from 'typeorm';
 import { CreateExecutionDto } from './dto/create-execution.dto';
 import { UpdateExecutionDto } from './dto/update-execution.dto';
@@ -9,9 +11,20 @@ import { Execution } from './entities/execution.entity';
 export class ExecutionsService {
   constructor(
     @InjectRepository(Execution)
-    private executionRepo: Repository<Execution>
+    private executionRepo: Repository<Execution>,
+
+    @InjectRepository(Associate)
+    private associateRepo: Repository<Associate>,
+    
+    @InjectRepository(Project)
+    private projectRepo: Repository<Project>,
   ) {}
+    
   create(createExecutionDto: CreateExecutionDto) {
+    try {this.associateExists(createExecutionDto.associateId);}
+    catch (err) {throw err;}
+    this.projectExists(createExecutionDto.projectId);
+    this.checkDbFim(createExecutionDto, createExecutionDto.associateId);
     const execution = this.executionRepo.create(createExecutionDto);
     return this.executionRepo.save(execution)
   }
@@ -38,4 +51,32 @@ export class ExecutionsService {
       throw new EntityNotFoundError(Execution, id + 'Associate not found');
     }
   }
+
+  private async associateExists(id: number) {
+    const associate = await this.associateRepo.findOne(id);
+    if (!associate) {
+      throw new EntityNotFoundError(Associate, id + ' Associate not found');
+    }
+  }
+
+  private async projectExists(id: number) {
+    const project = await this.projectRepo.findOne(id);
+    if (!project) {
+      throw new EntityNotFoundError(Project, id + ' Project not found');
+    }
+  }
+
+  // Check if createExecutionDto.Fim is greater than any other execution.Fim for a specific associateId
+  private async checkDbFim(createExecutionDto: CreateExecutionDto, associateId: number) {
+    const convertedInputInicio = new Date(createExecutionDto.Inicio);   
+    const allAssociateId = await this.executionRepo.find({
+      where: { associateId: associateId}
+    });
+    const allDbFim = allAssociateId.map(execution => execution.Fim);
+    const maxDateDbFim = new Date(Math.max.apply(null,allDbFim));
+    if (convertedInputInicio.getTime() <= maxDateDbFim.getTime()) {
+      throw new Error('Inicio must be greater than any other Fim');      
+    }
+  }
+  
 }

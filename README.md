@@ -89,7 +89,7 @@ To activate token requirement, just remove the comment from this notation from *
 
 This project is using PostgreSQL instead of MongoDB as suggested. 
 
-I couldn't implement the logic behind the limitation of one associate assigned for one project at a time, but I want to learn more to add value to future projects.
+[SOLVED on 19/11/2021] I couldn't implement the logic behind the limitation of one associate assigned for one project at a time, but I want to learn more to add value to future projects.
 
 ## Enjoy!
 
