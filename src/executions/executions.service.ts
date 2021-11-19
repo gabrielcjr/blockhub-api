@@ -21,12 +21,14 @@ export class ExecutionsService {
   ) {}
     
   create(createExecutionDto: CreateExecutionDto) {
-    try {this.associateExists(createExecutionDto.associateId);}
-    catch (err) {throw err;}
+    this.associateExists(createExecutionDto.associateId);
     this.projectExists(createExecutionDto.projectId);
     this.checkDbFim(createExecutionDto, createExecutionDto.associateId);
-    const execution = this.executionRepo.create(createExecutionDto);
-    return this.executionRepo.save(execution)
+    try {
+      const execution = this.executionRepo.create(createExecutionDto);
+      return this.executionRepo.save(execution)
+    }
+    catch (err) {throw err;}
   }
 
   findAll() {
@@ -66,13 +68,12 @@ export class ExecutionsService {
     }
   }
 
-  // Check if createExecutionDto.Fim is greater than any other execution.Fim for a specific associateId
   private async checkDbFim(createExecutionDto: CreateExecutionDto, associateId: number) {
     const convertedInputInicio = new Date(createExecutionDto.Inicio);   
-    const allAssociateId = await this.executionRepo.find({
+    const allAssociateIdInDb = await this.executionRepo.find({
       where: { associateId: associateId}
     });
-    const allDbFim = allAssociateId.map(execution => execution.Fim);
+    const allDbFim = allAssociateIdInDb.map(execution => execution.Fim);
     const maxDateDbFim = new Date(Math.max.apply(null,allDbFim));
     if (convertedInputInicio.getTime() <= maxDateDbFim.getTime()) {
       throw new Error('Inicio must be greater than any other Fim');      
