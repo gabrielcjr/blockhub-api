@@ -9,7 +9,7 @@ import { Project } from './entities/project.entity';
 export class ProjectsService {
   constructor(
     @InjectRepository(Project)
-    private projectRepo: Repository<Project>
+    private projectRepo: Repository<Project>,
   ) {}
   create(createProjectDto: CreateProjectDto) {
     const project = this.projectRepo.create(createProjectDto);
@@ -29,7 +29,7 @@ export class ProjectsService {
     if (!updateResult.affected) {
       throw new EntityNotFoundError(Project, id + 'Associate not found');
     }
-      return this.projectRepo.findOne(id);
+    return this.projectRepo.findOne(id);
   }
 
   async remove(id: number) {

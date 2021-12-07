@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, ValidationPipe, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+  ValidationPipe,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtGuard } from 'src/auth/auth/jwt.guard';
 import { AssociatesService } from './associates.service';
 import { CreateAssociateDto } from './dto/create-associate.dto';
@@ -10,7 +21,10 @@ export class AssociatesController {
   constructor(private readonly associatesService: AssociatesService) {}
 
   @Post()
-  create(@Body(new ValidationPipe({errorHttpStatusCode: 422})) createAssociateDto: CreateAssociateDto) {
+  create(
+    @Body(new ValidationPipe({ errorHttpStatusCode: 422 }))
+    createAssociateDto: CreateAssociateDto,
+  ) {
     return this.associatesService.create(createAssociateDto);
   }
 
@@ -25,7 +39,11 @@ export class AssociatesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body(new ValidationPipe({errorHttpStatusCode: 422})) updateAssociateDto: UpdateAssociateDto) {
+  update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ errorHttpStatusCode: 422 }))
+    updateAssociateDto: UpdateAssociateDto,
+  ) {
     return this.associatesService.update(+id, updateAssociateDto);
   }
 

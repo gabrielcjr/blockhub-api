@@ -9,7 +9,7 @@ import { Associate } from './entities/associate.entity';
 export class AssociatesService {
   constructor(
     @InjectRepository(Associate)
-    private associateRepo: Repository<Associate>
+    private associateRepo: Repository<Associate>,
   ) {}
   create(createAssociateDto: CreateAssociateDto) {
     const associate = this.associateRepo.create(createAssociateDto);
@@ -25,17 +25,20 @@ export class AssociatesService {
   }
 
   async update(id: number, updateAssociateDto: UpdateAssociateDto) {
-    const updateResult = await this.associateRepo.update(id, updateAssociateDto);
+    const updateResult = await this.associateRepo.update(
+      id,
+      updateAssociateDto,
+    );
     if (!updateResult.affected) {
       throw new EntityNotFoundError(Associate, id + 'Associate not found');
     }
-      return this.associateRepo.findOne(id);
+    return this.associateRepo.findOne(id);
   }
 
   async remove(id: number) {
     const deleteResult = await this.associateRepo.delete(id);
     if (!deleteResult.affected) {
       throw new EntityNotFoundError(Associate, id + 'Associate not found');
-    };
+    }
   }
 }

@@ -15,20 +15,21 @@ export class ExecutionsService {
 
     @InjectRepository(Associate)
     private associateRepo: Repository<Associate>,
-    
+
     @InjectRepository(Project)
     private projectRepo: Repository<Project>,
   ) {}
-    
+
   create(createExecutionDto: CreateExecutionDto) {
     this.associateExists(createExecutionDto.associateId);
     this.projectExists(createExecutionDto.projectId);
     this.checkDbFim(createExecutionDto, createExecutionDto.associateId);
     try {
       const execution = this.executionRepo.create(createExecutionDto);
-      return this.executionRepo.save(execution)
+      return this.executionRepo.save(execution);
+    } catch (err) {
+      throw err;
     }
-    catch (err) {throw err;}
   }
 
   findAll() {
@@ -40,14 +41,17 @@ export class ExecutionsService {
   }
 
   async update(id: number, updateExecutionDto: UpdateExecutionDto) {
-    const updateResult = await this.executionRepo.update(id, updateExecutionDto);
+    const updateResult = await this.executionRepo.update(
+      id,
+      updateExecutionDto,
+    );
     if (!updateResult.affected) {
       throw new EntityNotFoundError(Execution, id + 'Associate not found');
     }
-      return this.executionRepo.findOne(id);
+    return this.executionRepo.findOne(id);
   }
 
- async remove(id: number) {
+  async remove(id: number) {
     const deleteResult = await this.executionRepo.delete(id);
     if (!deleteResult.affected) {
       throw new EntityNotFoundError(Execution, id + 'Associate not found');
@@ -68,16 +72,18 @@ export class ExecutionsService {
     }
   }
 
-  private async checkDbFim(createExecutionDto: CreateExecutionDto, associateId: number) {
-    const convertedInputInicio = new Date(createExecutionDto.Inicio);   
+  private async checkDbFim(
+    createExecutionDto: CreateExecutionDto,
+    associateId: number,
+  ) {
+    const convertedInputInicio = new Date(createExecutionDto.Inicio);
     const allAssociateIdInDb = await this.executionRepo.find({
-      where: { associateId: associateId}
+      where: { associateId: associateId },
     });
-    const allDbFim = allAssociateIdInDb.map(execution => execution.Fim);
-    const maxDateDbFim = new Date(Math.max.apply(null,allDbFim));
+    const allDbFim = allAssociateIdInDb.map((execution) => execution.Fim);
+    const maxDateDbFim = new Date(Math.max.apply(null, allDbFim));
     if (convertedInputInicio.getTime() <= maxDateDbFim.getTime()) {
-      throw new Error('Inicio must be greater than any other Fim');      
+      throw new Error('Inicio must be greater than any other Fim');
     }
   }
-  
 }

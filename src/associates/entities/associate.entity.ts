@@ -1,23 +1,23 @@
-import { Execution } from "src/executions/entities/execution.entity";
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm";
+import { Execution } from 'src/executions/entities/execution.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-@Entity({ name: 'associates'}) 
+@Entity({ name: 'associates' })
 export class Associate {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    Nome: string;
+  @Column()
+  Nome: string;
 
-    @Column()
-    Cargo: string;
+  @Column()
+  Cargo: string;
 
-    @Column()
-    Admissão: string;
+  @Column()
+  Admissão: string;
 
-    @Column()
-    Ativo: boolean;
+  @Column()
+  Ativo: boolean;
 
-    @OneToMany(() => Execution, execution => execution.project)
-    executions: Execution[];
+  @OneToMany(() => Execution, (execution) => execution.project)
+  executions: Execution[];
 }

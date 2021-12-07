@@ -38,7 +38,7 @@ $ cd blockhub-api
 ## Give permission to the initialization script
 
 ```bash
-chmod +x .docker/entrypoint.sh 
+chmod +x .docker/entrypoint.sh
 ```
 
 ## Run docker-compose
@@ -49,27 +49,15 @@ $ docker-compose up
 
 Now, wait for both containers to be up and running
 
-*If you don't have Docker and Docker Compose in your machine, please, follow these instructions:
+\*If you don't have Docker and Docker Compose in your machine, please, follow these instructions:
 
-https://docs.docker.com/engine/install/ubuntu/
+<https://docs.docker.com/engine/install/ubuntu/>
 
-https://docs.docker.com/compose/install/
+<https://docs.docker.com/compose/install/>
 
-## The expected result when the application is successfully running 
+## The expected result when the application is successfully running
 
 ![Image](https://github.com/gabrielcjr/blockhub-api/blob/master/Running_app.png)
-
-## Open a new terminal and execute the following command to enter in the application container
-
-```bash
-$ docker-compose exec app bash
-```
-
-## Now, run the migration
-
-```bash
-$ npm run typeorm migration:run
-```
 
 Once migration is done, use the api.http file, associated with REST Client Extension for VS Code to test the routes.
 
@@ -79,15 +67,15 @@ Also, you can open Swagger to see all available endpoints at
 http://localhost:3000/api/
 ```
 
-For evaluation purposes, only /test-auth is protected with Token requirement to send requests. 
+For evaluation purposes, only /test-auth is protected with Token requirement to send requests.
 
-All other endpoins are open, but with @UseGuards(JwtGuard) notation commented. 
+All other endpoins are open, but with @UseGuards(JwtGuard) notation commented.
 
-To activate token requirement, just remove the comment from this notation from *.controller.ts of projects, associates, and executions.
+To activate token requirement, just remove the comment from this notation from \*.controller.ts of projects, associates, and executions.
 
 ## For Further implementations
 
-This project is using PostgreSQL instead of MongoDB as suggested. 
+This project is using PostgreSQL instead of MongoDB as suggested.
 
 [SOLVED on 19/11/2021] I couldn't implement the logic behind the limitation of one associate assigned for one project at a time, but I want to learn more to add value to future projects.
 

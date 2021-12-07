@@ -9,6 +9,6 @@ import { Project } from 'src/projects/entities/project.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Execution, Associate, Project])],
   controllers: [ExecutionsController],
-  providers: [ExecutionsService]
+  providers: [ExecutionsService],
 })
 export class ExecutionsModule {}

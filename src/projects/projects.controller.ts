@@ -1,4 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, ValidationPipe, UseGuards, UsePipes } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+  ValidationPipe,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
@@ -10,7 +22,10 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
-  create(@Body(new ValidationPipe({errorHttpStatusCode: 422})) createProjectDto: CreateProjectDto) {
+  create(
+    @Body(new ValidationPipe({ errorHttpStatusCode: 422 }))
+    createProjectDto: CreateProjectDto,
+  ) {
     return this.projectsService.create(createProjectDto);
   }
 
@@ -25,7 +40,11 @@ export class ProjectsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body(new ValidationPipe({errorHttpStatusCode: 422})) updateProjectDto: UpdateProjectDto) {
+  update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe({ errorHttpStatusCode: 422 }))
+    updateProjectDto: UpdateProjectDto,
+  ) {
     return this.projectsService.update(+id, updateProjectDto);
   }
 

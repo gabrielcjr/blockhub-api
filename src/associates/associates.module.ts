@@ -7,6 +7,6 @@ import { Associate } from './entities/associate.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Associate])],
   controllers: [AssociatesController],
-  providers: [AssociatesService]
+  providers: [AssociatesService],
 })
 export class AssociatesModule {}
