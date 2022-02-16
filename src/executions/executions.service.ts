@@ -20,12 +20,15 @@ export class ExecutionsService {
     private projectRepo: Repository<Project>,
   ) {}
 
-  create(createExecutionDto: CreateExecutionDto) {
-    this.associateExists(createExecutionDto.associateId);
-    this.projectExists(createExecutionDto.projectId);
-    this.checkDbFim(createExecutionDto, createExecutionDto.associateId);
+  async create(createExecutionDto: CreateExecutionDto) {
     try {
+      console.log('teste_create1');
+      await this.associateExists(createExecutionDto.associateId);
+      await this.projectExists(createExecutionDto.projectId);
+      await this.checkDbFim(createExecutionDto, createExecutionDto.associateId);
+      console.log('teste_create2');
       const execution = this.executionRepo.create(createExecutionDto);
+      console.log('teste_create3');
       return this.executionRepo.save(execution);
     } catch (err) {
       throw err;
@@ -60,7 +63,8 @@ export class ExecutionsService {
 
   private async associateExists(id: number) {
     const associate = await this.associateRepo.findOne(id);
-    if (!associate) {
+    if (typeof associate === 'undefined' || associate.Ativo === false) {
+      console.log('teste_associateExists');
       throw new EntityNotFoundError(Associate, id + ' Associate not found');
     }
   }
@@ -68,6 +72,7 @@ export class ExecutionsService {
   private async projectExists(id: number) {
     const project = await this.projectRepo.findOne(id);
     if (!project) {
+      console.log('teste_projectExists');
       throw new EntityNotFoundError(Project, id + ' Project not found');
     }
   }
@@ -83,7 +88,11 @@ export class ExecutionsService {
     const allDbFim = allAssociateIdInDb.map((execution) => execution.Fim);
     const maxDateDbFim = new Date(Math.max.apply(null, allDbFim));
     if (convertedInputInicio.getTime() <= maxDateDbFim.getTime()) {
-      throw new Error('Inicio must be greater than any other Fim');
+      console.log('teste_checkDB');
+      throw new EntityNotFoundError(
+        Execution,
+        +'Inicio must be greater than any other Fim',
+      );
     }
   }
 }
