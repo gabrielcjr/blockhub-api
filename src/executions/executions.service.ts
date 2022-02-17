@@ -22,13 +22,12 @@ export class ExecutionsService {
 
   async create(createExecutionDto: CreateExecutionDto) {
     try {
-      console.log('teste_create1');
       await this.associateExists(createExecutionDto.associateId);
       await this.projectExists(createExecutionDto.projectId);
       await this.checkDbFim(createExecutionDto, createExecutionDto.associateId);
-      console.log('teste_create2');
+
       const execution = this.executionRepo.create(createExecutionDto);
-      console.log('teste_create3');
+
       return this.executionRepo.save(execution);
     } catch (err) {
       throw err;
@@ -64,7 +63,6 @@ export class ExecutionsService {
   private async associateExists(id: number) {
     const associate = await this.associateRepo.findOne(id);
     if (typeof associate === 'undefined' || associate.Ativo === false) {
-      console.log('teste_associateExists');
       throw new EntityNotFoundError(Associate, id + ' Associate not found');
     }
   }
@@ -72,9 +70,16 @@ export class ExecutionsService {
   private async projectExists(id: number) {
     const project = await this.projectRepo.findOne(id);
     if (!project) {
-      console.log('teste_projectExists');
       throw new EntityNotFoundError(Project, id + ' Project not found');
     }
+  }
+
+  private dateRangeOverlaps(a_start, a_end, b_start, b_end) {
+    if (a_start <= b_start && b_start <= a_end) return true; // b starts in a
+    if (a_start <= b_end && b_end <= a_end) return true; // b ends in a
+    if (b_start < a_start && a_end < b_end) return true; // a in b
+    if (b_start > a_start && a_end > b_end) return true; // b in a
+    return false;
   }
 
   private async checkDbFim(
@@ -82,17 +87,24 @@ export class ExecutionsService {
     associateId: number,
   ) {
     const convertedInputInicio = new Date(createExecutionDto.Inicio);
+    const convertedInputFim = new Date(createExecutionDto.Fim);
     const allAssociateIdInDb = await this.executionRepo.find({
       where: { associateId: associateId },
     });
-    const allDbFim = allAssociateIdInDb.map((execution) => execution.Fim);
-    const maxDateDbFim = new Date(Math.max.apply(null, allDbFim));
-    if (convertedInputInicio.getTime() <= maxDateDbFim.getTime()) {
-      console.log('teste_checkDB');
-      throw new EntityNotFoundError(
-        Execution,
-        +'Inicio must be greater than any other Fim',
-      );
+
+    for (let i = 0; i < allAssociateIdInDb.length; i++) {
+      if (
+        this.dateRangeOverlaps(
+          allAssociateIdInDb[i]['Inicio'],
+          allAssociateIdInDb[i]['Fim'],
+          convertedInputInicio,
+          convertedInputFim,
+        )
+      ) {
+        throw new Error(
+          'An associate just can have one project assigned at a time',
+        );
+      }
     }
   }
 }
